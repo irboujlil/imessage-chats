@@ -3,8 +3,9 @@ import sqlite3
 import datetime
 import json
 import openai
+import os
 
-openai.api_key = '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'
+openai.api_key = os.environ.get('API_TOKEN')
 app = Flask(__name__)
 
 def get_chat_mapping(chatdb_location):
