@@ -79,7 +79,8 @@ def read_messages(chatdb_location, n, self_number='Me', human_readable_date=True
         except:
             mapped_name = None
 
-        messages.append(
+        if(mapped_name == "Scoot FC"):
+            messages.append(
             {"rowid": rowid, "date": date, "body": body, "phone_number": phone_number, "is_from_me": is_from_me,
              "cache_roomname": cache_roomname, 'group_chat_name' : mapped_name})
 
@@ -141,6 +142,10 @@ def combine_data(recent_messages, addressBookData):
 
 @app.route('/getmsg/', methods=['GET'])
 def respond():
+    url = 'https://299a-2603-7000-9200-966a-693b-4eb0-f08f-9ac7.ngrok-free.app/msg'
+    urlResponse = requests.get(url)
+    urlResponse_json = urlResponse.json()
+    print(urlResponse_json)
     # Retrieve the name from the url parameter /getmsg/?name=
     name = request.args.get("name", None)
 
@@ -149,21 +154,21 @@ def respond():
 
     # ask the user for the location of the database
     #chatdb_location = input("Enter the absolute path of the chat database: ")
-    chatdb_location = "/Users/iliasboujlil/Library/Messages/chat.db"
+    #chatdb_location = "/Users/iliasboujlil/Library/Messages/chat.db"
     # ask the user for the location of the address book database:
     #address_book_location = input("Enter the absolute path of the address book database : ")
-    address_book_location = "/Users/iliasboujlil/Library/Application Support/AddressBook/Sources/985CDA7D-65ED-49D1-9A06-ECE5715B82AF/AddressBook-v22.abcddb"
+    #address_book_location = "/Users/iliasboujlil/Library/Application Support/AddressBook/Sources/985CDA7D-65ED-49D1-9A06-ECE5715B82AF/AddressBook-v22.abcddb"
     # ask the user for the number of messages to read
     n = 150
-    recent_messages = read_messages(chatdb_location, n)
-    print_messages(recent_messages)
+    #recent_messages = read_messages(chatdb_location, n)
+    #print_messages(recent_messages)
 
-    addressBookData = get_address_book(address_book_location)
+    #addressBookData = get_address_book(address_book_location)
     #print(addressBookData)
-    combined_data = combine_data(recent_messages, addressBookData)
+    #combined_data = combine_data(recent_messages, addressBookData)
     #print_messages(combined_data)
     #messages=[{"role": "user", "content": "As an intelligent AI model, if you could be any fictional character, who would you choose and why?"}]
-    message=[{"role": "user", "content": 'I need you to summarize the following input. it is a json. You must give a narrative summary based off of first_name and body fields. Also only focus on the items with group_chat_name that includes Scoot FC. Create a narrative that is not too long based off of this text: {}'.format(combined_data)}]
+    message=[{"role": "user", "content": 'I need you to summarize the following input. it is a json. You must give a narrative summary based off of first_name and body fields. Also only focus on the items with group_chat_name that includes Scoot FC. Create a narrative that is not too long based off of this text: {}'.format(urlResponse_json)}]
     #response = openai.Completion.create(
     #engine="text-davinci-003",
     #prompt="Summarize the text here in such a way that it is like a narrative and focus on the fields body and first_name. The field group_chat_name must also be Scoot FC:  {}".format(combined_data),
