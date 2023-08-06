@@ -209,7 +209,7 @@ def respond():
         "status_callback": ""
     }
 
-    response_send_blue = requests.post(url, json=response.choices[0].message.content.strip(), headers=headers)
+    response_send_blue = requests.post(url, json=jsonify(response.choices[0].message.content.strip()), headers=headers)
     print(response_send_blue)
 
     #response = sendblue.send_group_message(['+15133765542', '+15169967345'], response.choices[0].message.content.strip(), send_style='invisible')
