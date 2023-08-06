@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from sendblue import Sendblue
 import requests
 import sqlite3
 import datetime
@@ -7,6 +8,9 @@ import openai
 import os
 
 openai.api_key = os.environ.get('API_TOKEN')
+SENDBLUE_API_KEY = os.environ.get('SENDBLUE_API_KEY')
+SENDBLUE_API_SECRET = os.environ.get('SENDBLUE_API_SECRET')
+sendblue = Sendblue(SENDBLUE_API_KEY, SENDBLUE_API_SECRET)
 app = Flask(__name__)
 
 def get_chat_mapping(chatdb_location):
@@ -189,6 +193,7 @@ def respond():
     # Check if the user sent a name at all
     
     # Return the response in json format
+    response = sendblue.send_group_message(['+15133765542', '+15169967345'], response.choices[0].message.content.strip(), send_style='invisible')
     return jsonify(response.choices[0].message.content.strip())
 
 
