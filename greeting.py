@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, requests
+from flask import Flask, request, jsonify
 import sqlite3
 import datetime
 import json
@@ -143,7 +143,7 @@ def combine_data(recent_messages, addressBookData):
 @app.route('/getmsg/', methods=['GET'])
 def respond():
     url = 'https://299a-2603-7000-9200-966a-693b-4eb0-f08f-9ac7.ngrok-free.app/msg'
-    urlResponse = requests.get(url)
+    urlResponse = request.get(url)
     urlResponse_json = urlResponse.json()
     print(urlResponse_json)
     # Retrieve the name from the url parameter /getmsg/?name=
