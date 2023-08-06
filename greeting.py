@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from sendblue import Sendblue
+#from sendblue import Sendblue
 import requests
 import sqlite3
 import datetime
@@ -10,7 +10,7 @@ import os
 openai.api_key = os.environ.get('API_TOKEN')
 SENDBLUE_API_KEY = os.environ.get('SENDBLUE_API_KEY')
 SENDBLUE_API_SECRET = os.environ.get('SENDBLUE_API_SECRET')
-sendblue = Sendblue(SENDBLUE_API_KEY, SENDBLUE_API_SECRET)
+#sendblue = Sendblue(SENDBLUE_API_KEY, SENDBLUE_API_SECRET)
 app = Flask(__name__)
 
 def get_chat_mapping(chatdb_location):
@@ -193,7 +193,26 @@ def respond():
     # Check if the user sent a name at all
     
     # Return the response in json format
-    response = sendblue.send_group_message(['+15133765542', '+15169967345'], response.choices[0].message.content.strip(), send_style='invisible')
+    url = "https://api.sendblue.co/api/send-message"
+
+    headers = {
+        "sb-api-key-id": SENDBLUE_API_KEY,
+        "sb-api-secret-key": SENDBLUE_API_SECRET,
+        "Content-Type": "application/json",
+    }
+
+    data = {
+        "number": "+15133765542",
+        "content": "Hello world!",
+        "send_style": "invisible",
+        "media_url": "",
+        "status_callback": ""
+    }
+
+    response_send_blue = requests.post(url, json=data, headers=headers)
+    print(response_send_blue)
+
+    #response = sendblue.send_group_message(['+15133765542', '+15169967345'], response.choices[0].message.content.strip(), send_style='invisible')
     return jsonify(response.choices[0].message.content.strip())
 
 
