@@ -143,7 +143,12 @@ def combine_data(recent_messages, addressBookData):
             if phone_number == contact_number:
                 message["first_name"] = contact["FIRSTNAME"]
                 message["last_name"] = contact["LASTNAME"]
-    return recent_messages
+    return 
+
+@app.route('/print_message', methods=['POST'])
+def json_example():
+    request_data = request.get_json()
+    print(request_data)
 
 @app.route('/getmsg/', methods=['GET'])
 def respond():
@@ -156,6 +161,8 @@ def respond():
 
     # For debugging
     print(f"Received: {name}")
+
+
 
     # ask the user for the location of the database
     #chatdb_location = input("Enter the absolute path of the chat database: ")
