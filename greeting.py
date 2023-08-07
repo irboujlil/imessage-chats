@@ -204,7 +204,7 @@ def respond():
     data = {
         "number": "+15133765542",
         "content": str(response.choices[0].message.content.strip()),
-        "send_style": "invisible",
+        "send_style": "",
         "media_url": "",
         "status_callback": ""
     }
