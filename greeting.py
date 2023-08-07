@@ -145,7 +145,7 @@ def combine_data(recent_messages, addressBookData):
                 message["last_name"] = contact["LASTNAME"]
     return 
 
-@app.route('/print_message', methods=['POST'])
+@app.route('/print_message/', methods=['POST'])
 def json_example():
     request_data = request.get_json()
     print(request_data)
