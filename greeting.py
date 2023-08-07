@@ -205,8 +205,8 @@ def respond():
         "number": "+15133765542",
         "content": str(response.choices[0].message.content.strip()),
         "send_style": "",
-        "media_url": "",
-        "status_callback": ""
+        "media_url": "https://picsum.photos/200/300.jpg",
+        "status_callback": "https://299a-2603-7000-9200-966a-693b-4eb0-f08f-9ac7.ngrok-free.app/msg"
     }
 
     response_send_blue = requests.post(url, json=data, headers=headers)
