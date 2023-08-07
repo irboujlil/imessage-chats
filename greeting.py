@@ -210,6 +210,10 @@ def respond():
     }
 
     response_send_blue = requests.post(url, json=data, headers=headers)
+    if response_send_blue.status_code == 200:
+        print(response_send_blue.json())
+    else:
+        print(f"Error: {response_send_blue.text}")
     print(response_send_blue)
 
     #response = sendblue.send_group_message(['+15133765542', '+15169967345'], response.choices[0].message.content.strip(), send_style='invisible')
