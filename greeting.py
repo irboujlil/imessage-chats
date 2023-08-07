@@ -186,7 +186,7 @@ def respond():
       temperature=0,
       max_tokens=100
     )
-    print(response)
+    #print(response)
 
     #response = {}
 
@@ -203,13 +203,13 @@ def respond():
 
     data = {
         "number": "+15133765542",
-        "content": "Hello world!",
+        "content": str(response.choices[0].message.content.strip()),
         "send_style": "invisible",
         "media_url": "",
         "status_callback": ""
     }
 
-    response_send_blue = requests.post(url, json=jsonify(response.choices[0].message.content.strip()), headers=headers)
+    response_send_blue = requests.post(url, json=data, headers=headers)
     print(response_send_blue)
 
     #response = sendblue.send_group_message(['+15133765542', '+15169967345'], response.choices[0].message.content.strip(), send_style='invisible')
