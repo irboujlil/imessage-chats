@@ -151,7 +151,7 @@ def json_example():
     print(request_data)
     return request_data
 
-@app.route('/getmsg/', methods=['GET'])
+@app.route('/getmsg/', methods=['POST'])
 def respond():
     url = 'https://299a-2603-7000-9200-966a-693b-4eb0-f08f-9ac7.ngrok-free.app/msg'
     urlResponse = requests.get(url)
