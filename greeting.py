@@ -204,7 +204,7 @@ def respondMessage():
     # Check if the user sent a name at all
     
     # Return the response in json format
-    url = "https://api.sendblue.co/api/send-group-message"
+    url = "https://api.sendblue.co/api/send-message"
 
     headers = {
         "sb-api-key-id": SENDBLUE_API_KEY,
@@ -213,7 +213,7 @@ def respondMessage():
     }
 
     data = {
-        "number": "+15133765542"
+        "number": "+15133765542",
         "content": str(response.choices[0].message.content.strip()),
         "send_style": "",
         "media_url": "",
