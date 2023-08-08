@@ -263,7 +263,7 @@ def respond():
     #combined_data = combine_data(recent_messages, addressBookData)
     #print_messages(combined_data)
     #messages=[{"role": "user", "content": "As an intelligent AI model, if you could be any fictional character, who would you choose and why?"}]
-    message=[{"role": "user", "content": 'I need you to summarize the following input. it is a json. You must give a story type summary. Focus on the first_name and body fields. Also only focus on the items with group_chat_name that includes Scoot FC. Create a story type narrative that is not too long based off of this text and make it 4 lines or less: {}'.format(urlResponse_json)}]
+    message=[{"role": "user", "content": 'I need you to summarize the following input. it is a json. You must give a story type summary. Focus on the first_name and body fields. The first_name is the sender of the message and the body is the content of the message. Also only focus on the items with group_chat_name that includes Scoot FC. Create a story type narrative that is not too long based off of this text and make it 4 lines or less: {}'.format(urlResponse_json)}]
     #response = openai.Completion.create(
     #engine="text-davinci-003",
     #prompt="Summarize the text here in such a way that it is like a narrative and focus on the fields body and first_name. The field group_chat_name must also be Scoot FC:  {}".format(combined_data),
