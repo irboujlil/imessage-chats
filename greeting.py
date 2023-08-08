@@ -204,7 +204,7 @@ def respond():
     # Check if the user sent a name at all
     
     # Return the response in json format
-    url = "https://api.sendblue.co/api/send-message"
+    url = "https://api.sendblue.co/api/send-group-message"
 
     headers = {
         "sb-api-key-id": SENDBLUE_API_KEY,
@@ -213,10 +213,13 @@ def respond():
     }
 
     data = {
-        "number": "+15133765542",
+        "numbers": [
+        '+15133765542',
+        '+15159967345'
+        ],
         "content": str(response.choices[0].message.content.strip()),
         "send_style": "",
-        "media_url": "https://picsum.photos/200/300.jpg",
+        "media_url": "",
         "status_callback": "https://299a-2603-7000-9200-966a-693b-4eb0-f08f-9ac7.ngrok-free.app/msg"
     }
 
@@ -230,6 +233,82 @@ def respond():
     #response = sendblue.send_group_message(['+15133765542', '+15169967345'], response.choices[0].message.content.strip(), send_style='invisible')
     return jsonify(response.choices[0].message.content.strip())
 
+@app.route('/getmsg/', methods=['GET'])
+def respond():
+    
+    url = 'https://299a-2603-7000-9200-966a-693b-4eb0-f08f-9ac7.ngrok-free.app/msg'
+    urlResponse = requests.get(url)
+    urlResponse_json = urlResponse.json()
+    print(urlResponse_json)
+    # Retrieve the name from the url parameter /getmsg/?name=
+    name = request.args.get("name", None)
+
+    # For debugging
+    print(f"Received: {name}")
+
+
+
+    # ask the user for the location of the database
+    #chatdb_location = input("Enter the absolute path of the chat database: ")
+    #chatdb_location = "/Users/iliasboujlil/Library/Messages/chat.db"
+    # ask the user for the location of the address book database:
+    #address_book_location = input("Enter the absolute path of the address book database : ")
+    #address_book_location = "/Users/iliasboujlil/Library/Application Support/AddressBook/Sources/985CDA7D-65ED-49D1-9A06-ECE5715B82AF/AddressBook-v22.abcddb"
+    # ask the user for the number of messages to read
+    n = 150
+    #recent_messages = read_messages(chatdb_location, n)
+    #print_messages(recent_messages)
+
+    #addressBookData = get_address_book(address_book_location)
+    #print(addressBookData)
+    #combined_data = combine_data(recent_messages, addressBookData)
+    #print_messages(combined_data)
+    #messages=[{"role": "user", "content": "As an intelligent AI model, if you could be any fictional character, who would you choose and why?"}]
+    message=[{"role": "user", "content": 'I need you to summarize the following input. it is a json. You must give a narrative summary based off of first_name and body fields. Also only focus on the items with group_chat_name that includes Scoot FC. Create a narrative that is not too long based off of this text: {}'.format(urlResponse_json)}]
+    #response = openai.Completion.create(
+    #engine="text-davinci-003",
+    #prompt="Summarize the text here in such a way that it is like a narrative and focus on the fields body and first_name. The field group_chat_name must also be Scoot FC:  {}".format(combined_data),
+    #max_tokens=500,
+    #)
+
+    response = openai.ChatCompletion.create(
+      model="gpt-3.5-turbo-16k",
+      messages=message,
+      temperature=0,
+      max_tokens=100
+    )
+    #print(response)
+
+    #response = {}
+
+    # Check if the user sent a name at all
+    
+    # Return the response in json format
+    url = "https://api.sendblue.co/api/send-message"
+
+    headers = {
+        "sb-api-key-id": SENDBLUE_API_KEY,
+        "sb-api-secret-key": SENDBLUE_API_SECRET,
+        "Content-Type": "application/json",
+    }
+
+    data = {
+        "number": "+15133765542",
+        "content": str(response.choices[0].message.content.strip()),
+        "send_style": "",
+        "media_url": "",
+        "status_callback": "https://299a-2603-7000-9200-966a-693b-4eb0-f08f-9ac7.ngrok-free.app/msg"
+    }
+
+    response_send_blue = requests.post(url, json=data, headers=headers)
+    if response_send_blue.status_code == 200:
+        print(response_send_blue.json())
+    else:
+        print(f"Error: {response_send_blue.text}")
+    print(response_send_blue)
+
+    #response = sendblue.send_group_message(['+15133765542', '+15169967345'], response.choices[0].message.content.strip(), send_style='invisible')
+    return jsonify(response.choices[0].message.content.strip())
 
 @app.route('/post/', methods=['POST'])
 def post_something():
