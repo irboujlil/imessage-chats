@@ -213,10 +213,7 @@ def respondMessage():
     }
 
     data = {
-        "numbers": [
-        '+15133765542',
-        '+15159967345'
-        ],
+        "number": "+15133765542"
         "content": str(response.choices[0].message.content.strip()),
         "send_style": "",
         "media_url": "",
@@ -227,6 +224,7 @@ def respondMessage():
     response_send_blue = requests.post(url, json=data, headers=headers)
     if response_send_blue.status_code == 200:
         print(response_send_blue.json())
+        print("REQUEST SUCCESSFUL")
     else:
         print(f"Error: {response_send_blue.text}")
     print(response_send_blue)
