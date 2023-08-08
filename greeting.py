@@ -151,7 +151,7 @@ def json_example():
     print(request_data)
     return request_data
 
-@app.route('/getmsg/', methods=['POST'])
+@app.route('/sendMessage/', methods=['POST'])
 def respond():
     request_data = request.get_json()
     print(request_data)
