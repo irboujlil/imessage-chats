@@ -149,6 +149,7 @@ def combine_data(recent_messages, addressBookData):
 def json_example():
     request_data = request.get_json()
     print(request_data)
+    return request_data
 
 @app.route('/getmsg/', methods=['GET'])
 def respond():
