@@ -222,6 +222,7 @@ def respondMessage():
         "media_url": "",
         "status_callback": "https://299a-2603-7000-9200-966a-693b-4eb0-f08f-9ac7.ngrok-free.app/msg"
     }
+    print("IN HERE")
 
     response_send_blue = requests.post(url, json=data, headers=headers)
     if response_send_blue.status_code == 200:
@@ -231,7 +232,7 @@ def respondMessage():
     print(response_send_blue)
 
     #response = sendblue.send_group_message(['+15133765542', '+15169967345'], response.choices[0].message.content.strip(), send_style='invisible')
-    return jsonify(response.choices[0].message.content.strip())
+    return request_data
 
 @app.route('/getmsg/', methods=['GET'])
 def respond():
