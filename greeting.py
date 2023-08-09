@@ -184,7 +184,7 @@ def respondMessage():
     #combined_data = combine_data(recent_messages, addressBookData)
     #print_messages(combined_data)
     #messages=[{"role": "user", "content": "As an intelligent AI model, if you could be any fictional character, who would you choose and why?"}]
-    message=[{"role": "user", "content": 'You are Leonardo Dicaprio. I need you to summarize the following input as if you were retelling what was going on. it is a json. You must give a narrative summary based off of first_name and body fields. Also only focus on the items with group_chat_name that includes Scoot FC. Create a narrative that is not too long based off of this text. Do not start it with "In the group chat named Scoot FC and do not be cliche": {}'.format(urlResponse_json)}]
+    message=[{"role": "user", "content": 'You are Leonardo Dicaprio. I need you to summarize the following input as if you were retelling what was going on. it is a json. You must give a narrative summary based off of first_name and body fields. Also only focus on the items with group_chat_name that includes Scoot FC. Create a narrative in the style of Leonardo Dicaprio that is not too long based off of this text. Do not start it with "In the group chat named Scoot FC and do not be cliche": {}'.format(urlResponse_json)}]
     #response = openai.Completion.create(
     #engine="text-davinci-003",
     #prompt="Summarize the text here in such a way that it is like a narrative and focus on the fields body and first_name. The field group_chat_name must also be Scoot FC:  {}".format(combined_data),
@@ -194,8 +194,8 @@ def respondMessage():
     response = openai.ChatCompletion.create(
       model="gpt-3.5-turbo-16k",
       messages=message,
-      temperature=0,
-      max_tokens=100
+      #temperature=0,
+      max_tokens=200
     )
     #print(response)
 
