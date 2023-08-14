@@ -156,7 +156,7 @@ def respondMessage():
     request_data = request.get_json()
     print(request_data)
     #return request_data
-    url = 'https://5890-2603-7000-9200-966a-18e1-47af-5371-dd61.ngrok-free.app/msg'
+    url = 'https://5f07-2603-7000-9200-966a-25dd-cda-2667-33e2.ngrok-free.app/msg'
     urlResponse = requests.get(url)
     urlResponse_json = urlResponse.json()
     print(urlResponse_json)
@@ -217,7 +217,7 @@ def respondMessage():
         "content": str(response.choices[0].message.content.strip()),
         "send_style": "",
         "media_url": "",
-        "status_callback": "https://5890-2603-7000-9200-966a-18e1-47af-5371-dd61.ngrok-free.app/msg"
+        "status_callback": "https://5f07-2603-7000-9200-966a-25dd-cda-2667-33e2.ngrok-free.app/msg"
     }
     print("IN HERE")
 
@@ -235,7 +235,7 @@ def respondMessage():
 @app.route('/getmsg/', methods=['GET'])
 def respond():
     
-    url = 'https://5890-2603-7000-9200-966a-18e1-47af-5371-dd61.ngrok-free.app/msg'
+    url = 'https://5f07-2603-7000-9200-966a-25dd-cda-2667-33e2.ngrok-free.app/msg'
     urlResponse = requests.get(url)
     urlResponse_json = urlResponse.json()
     print(urlResponse_json)
@@ -296,7 +296,7 @@ def respond():
         "content": str(response.choices[0].message.content.strip()),
         "send_style": "",
         "media_url": "",
-        "status_callback": "https://5890-2603-7000-9200-966a-18e1-47af-5371-dd61.ngrok-free.app/msg"
+        "status_callback": "https://5f07-2603-7000-9200-966a-25dd-cda-2667-33e2.ngrok-free.app/msg"
     }
 
     response_send_blue = requests.post(url, json=data, headers=headers)
